@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.Scanner;
 public class Dice {
     public Dice() {
-
     }
     public int throwDice() {
          int score =0;
@@ -24,7 +23,13 @@ public class Dice {
                   scanner.nextLine();
                   score += num1+num2;
               }
-
+              if(num1!=num2) {
+                  System.out.println("Points From from Dice 1: "+ num1);
+                  System.out.println("Points From from Dice 2: "+ num2);
+                  score +=num1+num2;
+                  System.out.println("All points from these rolls: "+ score);
+                  return score;
+              }
          }
     }
 }
