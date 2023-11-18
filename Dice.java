@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 public class Dice {
-    private int score;
+    private int score = 0;
     public Dice() {
     }
     public int throwDice() {
@@ -22,22 +22,18 @@ public class Dice {
                   System.out.println("Press ENTER To throw the dices again!");
                   scanner.nextLine();
                   score += num1+num2;
+                   if(score > 28) {
+                       score = score -28;
+                   }
+                   //Function to add properties should be added
               }
               if(num1!=num2) {
                   System.out.println("Points From from Dice 1: "+ num1);
                   System.out.println("Points From from Dice 2: "+ num2);
                   score +=num1+num2;
-                  System.out.println("All points from these rolls: "+ score);
+
                   return score;
               }
-
          }
-    }
-    public int getScore() {
-        if(score > 28) {
-            return score = score -28;
-        }
-        else
-            return score;
     }
 }
