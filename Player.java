@@ -12,9 +12,12 @@ public class Player {
         return money;
      }
     // Getter for position
-   public int setPosition() {
+   public int throwDice() {
         this.position = dice.throwDice();
         return this.position;
+    }
+    public int getPosition() {
+         return dice.getScore();
     }
     // Getter for name
     public String getName() {

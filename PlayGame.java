@@ -9,15 +9,16 @@ public class PlayGame {
     }
     public void Play() {
         users.setPlayer();
-        System.out.println(users.players[1].setPosition());
+        System.out.println(users.players[1].throwDice());
         System.out.println(users.players[1].getName());
+        System.out.println(users.players[1].getPosition());
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
         System.out.println();
-        System.out.println("*************************************************");
-        System.out.println(users.players[0].setPosition());
-        System.out.println(users.players[0].setPosition());
+       //System.out.println("*************************************************");
+       //System.out.println(users.players[0].throwDice());
+       //System.out.println(users.players[0].throwDice());
     }
 }

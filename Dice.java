@@ -36,4 +36,8 @@ public class Dice {
               }
          }
     }
+      public int getScore() {
+         return score;
+      }
+
 }
