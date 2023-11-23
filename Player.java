@@ -12,12 +12,18 @@ public class Player {
         return money;
      }
     // Getter for position
+    public void setMoney(int newMoney) {
+        money = newMoney;
+    }
    public int throwDice() {
         this.position = dice.throwDice();
         return this.position;
     }
     public int getPosition() {
          return dice.getScore();
+    }
+    public void setPosition(int newPosition) {
+        this.position = newPosition;
     }
     // Getter for name
     public String getName() {
