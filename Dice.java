@@ -4,8 +4,7 @@ public class Dice {
     private int score = 0;
     public Dice() {
     }
-    public int throwDice() {
-
+    public int diceScore() {
          while(true) {
               Scanner scanner = new Scanner(System.in);
               Random random1= new Random();
@@ -36,8 +35,8 @@ public class Dice {
               }
          }
     }
+
       public int getScore() {
          return score;
       }
-
 }

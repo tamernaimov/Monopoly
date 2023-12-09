@@ -6,7 +6,7 @@ public class Player {
     }
     Scanner scanner = new Scanner(System.in);
     protected int money;
-    protected int position;
+    private int position;
     protected String name;
      public int getMoney() {
         return money;
@@ -15,12 +15,12 @@ public class Player {
     public void setMoney(int newMoney) {
         money = newMoney;
     }
-   public int throwDice() {
-        this.position = dice.throwDice();
-        return this.position;
+    public int throwDice() {
+        position = dice.diceScore();
+        return position;
     }
     public int getPosition() {
-         return dice.getScore();
+         return position;
     }
     public void setPosition(int newPosition) {
         this.position = newPosition;
