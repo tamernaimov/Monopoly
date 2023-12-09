@@ -6,21 +6,22 @@ public class Player {
     }
     Scanner scanner = new Scanner(System.in);
     protected int money;
-    protected int position;
+    private int position;
     protected String name;
-     public int getMoney() {
+    private boolean hasGetOutOfJailFreeCard;
+    public int getMoney() {
         return money;
-     }
+    }
     // Getter for position
     public void setMoney(int newMoney) {
         money = newMoney;
     }
-   public int throwDice() {
-        this.position = dice.throwDice();
-        return this.position;
+    public int throwDice() {
+        position = dice.diceScore();
+        return position;
     }
     public int getPosition() {
-         return dice.getScore();
+        return position;
     }
     public void setPosition(int newPosition) {
         this.position = newPosition;
@@ -28,5 +29,38 @@ public class Player {
     // Getter for name
     public String getName() {
         return name;
+    }
+    private boolean isInJail;
+    private int roundsInJail;
+
+    public boolean isInJail() {
+        return isInJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        isInJail = inJail;
+    }
+
+    public int getRoundsInJail() {
+        return roundsInJail;
+    }
+
+    public void incrementRoundsInJail() {
+        roundsInJail++;
+    }
+
+    public void resetRoundsInJail() {
+        roundsInJail = 0;
+    }
+    public boolean hasGetOutOfJailFreeCard() {
+        return hasGetOutOfJailFreeCard;
+    }
+    public void setHasGetOutOfJailFreeCard(boolean hasCard) {
+        this.hasGetOutOfJailFreeCard = hasCard;
+    }
+    public void useGetOutOfJailFreeCard() {
+        if (hasGetOutOfJailFreeCard) {
+            this.hasGetOutOfJailFreeCard = false;
+        }
     }
 }
