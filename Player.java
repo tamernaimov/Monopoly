@@ -21,7 +21,7 @@ public class Player {
         return position;
     }
     public int getPosition() {
-        return position;
+         return position;
     }
     public void setPosition(int newPosition) {
         this.position = newPosition;

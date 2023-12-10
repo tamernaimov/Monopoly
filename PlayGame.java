@@ -1,26 +1,27 @@
 import java.nio.file.attribute.UserPrincipalLookupService;
 
 public class PlayGame {
-    Players users;
-    Dice dice;
+    private Players users;
+    private Dice dice;
+    private Properties properties;
     private Player currentPlayer;
     private Board gameBoard;
     private CardManager cardManager;
 
-    public PlayGame(Player currentPlayer, Board gameBoard, CardManager cardManager) {
+    public PlayGame(Player currentPlayer, Board gameBoard, CardManager cardManager, Players users, Dice dice, Properties properties) {
         this.currentPlayer = currentPlayer;
         this.gameBoard = gameBoard;
         this.cardManager = cardManager;
+        this.users = users;
+        this.dice = dice;
+        this.properties = properties;
     }
+
     public void checkAndExecuteCard() {
         int currentPlayerPosition = currentPlayer.getPosition();
         String currentPositionName = gameBoard.getPositionName(currentPlayerPosition);
 
-        if ("Chance".equals(currentPositionName)) {
-            drawAndExecuteCard();
-        }
-
-        if ("Community Chest".equals(currentPositionName)) {
+        if ("Chance".equals(currentPositionName) || "Community Chest".equals(currentPositionName)) {
             drawAndExecuteCard();
         }
     }
@@ -38,23 +39,17 @@ public class PlayGame {
             }
         }
     }
-    public PlayGame(Players users, Dice dice) {
-        this.users = users;
-        this.dice = dice;
-    }
+
     public void Play() {
-        users.setPlayer();
-        System.out.println(users.players[1].throwDice());
-        System.out.println(users.players[1].getName());
-        System.out.println(users.players[1].getPosition());
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        //System.out.println("*************************************************");
-        //System.out.println(users.players[0].throwDice());
-        //System.out.println(users.players[0].throwDice());
-        checkAndExecuteCard();
+        users.setPlayer();  // Allow players to enter their names
+        properties.setProperties();
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(users.players[i].getName() + "'s turn:");
+            System.out.println();
+            System.out.println(users.players[i].throwDice());
+            properties.buyProperty(i);
+            checkAndExecuteCard();
+        }
     }
 }
