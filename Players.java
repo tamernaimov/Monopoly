@@ -1,5 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class Players {
+    //it gets all the players
+    private static List<Player> allPlayers = new ArrayList<>();
+
+    public static List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
     protected Player[] players;
     private Scanner scanner = new Scanner(System.in);
     public Players(Dice dice) {
@@ -8,7 +17,7 @@ public class Players {
             players[i] = new Player(dice);
         }
     }
-       public void setPlayer() {
+    public void setPlayer() {
         for (int i = 0; i < 4; i++) {
             System.out.println("Enter name for player number " + (i + 1) + ":");
             players[i].name = scanner.nextLine();

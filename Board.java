@@ -14,7 +14,6 @@ public class Board {
 
         return boardPositions.get(position);
     }
-    //public String setPositionName
     private void initializeBoard() {
         boardPositions = new ArrayList<>();
         for (int i = 0; i < 40; i++) {

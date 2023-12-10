@@ -17,6 +17,7 @@ public class CommunityChestCard implements Cards{
     @Override
     public void executeAction(Player player) {
         int currentMoney = player.getMoney();
+        List<Player> allPlayers = Players.getAllPlayers();
 
         switch (getDescription()) {
             case "Advance to Go (Collect $200)":
@@ -42,12 +43,15 @@ public class CommunityChestCard implements Cards{
 
             case "CommunityChest:Get Out of Jail Free":
                 System.out.println("Player " + player.getName() + " receives a Get Out of Jail Free card.");
-                //logic for Get Out of Jail Free card
+                player.setHasGetOutOfJailFreeCard(true);
                 break;
 
             case "CommunityChest:Go to Jail. Go directly to jail, do not pass Go, do not collect $200":
                 System.out.println("Player " + player.getName() + " goes to Jail.");
                 advanceToPosition(player,"GO TO JAIL!");
+                player.setInJail(true);
+                player.resetRoundsInJail();
+                Jail.handleJail(player);
                 break;
 
             case "CommunityChest:Holiday fund matures. Receive $100":
@@ -62,7 +66,13 @@ public class CommunityChestCard implements Cards{
 
             case "CommunityChest:It is your birthday. Collect $10 from every player":
                 System.out.println("Player " + player.getName() + " collects $10 from every player for their birthday.");
-                //logic for collecting from every player
+                for (Player otherPlayer : allPlayers) {
+                    if (otherPlayer != player) {
+                        int otherPlayerMoney = otherPlayer.getMoney();
+                        otherPlayer.setMoney(otherPlayerMoney - 10);
+                        player.setMoney(player.getMoney() + 10);
+                    }
+                }
                 break;
 
             case "CommunityChest:Life insurance matures.Collect $100":
@@ -87,7 +97,6 @@ public class CommunityChestCard implements Cards{
 
             case "CommunityChest:You are assessed for street repair. $40 per house. $115 per hotel":
                 System.out.println("Player " + player.getName() + " is assessed for street repair.");
-                // Add logic for assessing street repair costs
                 break;
 
             case "CommunityChest:You have won second prize in a beauty contest. Collect $10":
@@ -110,7 +119,6 @@ public class CommunityChestCard implements Cards{
         int targetPos = board.getPositionIndexByName(targetPosition);
         int currentPosition = player.getPosition();
         int spacesToMove = (targetPos - currentPosition + boardPositions.size()) % boardPositions.size();
-        //update players position
         int newPosition = (currentPosition + spacesToMove) % boardPositions.size();
         player.setPosition(newPosition);
 

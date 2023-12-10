@@ -1,5 +1,4 @@
 import java.util.List;
-
 public class ChanceCard implements Cards{
     private String description;
     private Board board;
@@ -43,7 +42,7 @@ public class ChanceCard implements Cards{
 
             case "Get Out of Jail Free":
                 System.out.println("Player " + player.getName() + " receives a Get Out of Jail Free card.");
-                // Add logic for handling the Get Out of Jail Free card
+                player.setHasGetOutOfJailFreeCard(true);
                 break;
 
             case "Go Back 3 Spaces":
@@ -54,6 +53,9 @@ public class ChanceCard implements Cards{
             case "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200":
                 System.out.println("Player " + player.getName() + " goes to Jail.");
                 advanceToPosition(player,"GO TO JAIL!");
+                player.setInJail(true);
+                player.resetRoundsInJail();
+                Jail.handleJail(player);
                 break;
 
             case "Make general repairs on all your property. For each house pay $25. For each hotel pay $100":
@@ -92,7 +94,6 @@ public class ChanceCard implements Cards{
         int currentPosition = player.getPosition();
         int spacesToMove = (targetPos - currentPosition + boardPositions.size()) % boardPositions.size();
 
-        // Update the player's position
         int newPosition = (currentPosition + spacesToMove) % boardPositions.size();
         player.setPosition(newPosition);
 
