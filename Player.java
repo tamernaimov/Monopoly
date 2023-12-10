@@ -8,9 +8,10 @@ public class Player {
     protected int money;
     private int position;
     protected String name;
-     public int getMoney() {
+    private boolean hasGetOutOfJailFreeCard;
+    public int getMoney() {
         return money;
-     }
+    }
     // Getter for position
     public void setMoney(int newMoney) {
         money = newMoney;
@@ -28,5 +29,38 @@ public class Player {
     // Getter for name
     public String getName() {
         return name;
+    }
+    private boolean isInJail;
+    private int roundsInJail;
+
+    public boolean isInJail() {
+        return isInJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        isInJail = inJail;
+    }
+
+    public int getRoundsInJail() {
+        return roundsInJail;
+    }
+
+    public void incrementRoundsInJail() {
+        roundsInJail++;
+    }
+
+    public void resetRoundsInJail() {
+        roundsInJail = 0;
+    }
+    public boolean hasGetOutOfJailFreeCard() {
+        return hasGetOutOfJailFreeCard;
+    }
+    public void setHasGetOutOfJailFreeCard(boolean hasCard) {
+        this.hasGetOutOfJailFreeCard = hasCard;
+    }
+    public void useGetOutOfJailFreeCard() {
+        if (hasGetOutOfJailFreeCard) {
+            this.hasGetOutOfJailFreeCard = false;
+        }
     }
 }
