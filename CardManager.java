@@ -34,9 +34,9 @@ public class CardManager {
 
     private Cards createCardFromDescription(String description) {
         if (description.startsWith("Chance:")) {
-            return new ChanceCard(description, board);
+            return new ChanceCard(board);
         } else if (description.startsWith("Community Chest:")) {
-            return new CommunityChestCard(description,board);
+            return new CommunityChestCard(board);
         } else {
             return null;
         }

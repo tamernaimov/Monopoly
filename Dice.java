@@ -1,12 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
-
 public class Dice {
     private int score = 0;
-
     public Dice() {
     }
-
     public int diceScore() {
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -24,8 +21,8 @@ public class Dice {
                 System.out.println("Press ENTER To throw the dices again!");
                 scanner.nextLine();
                 score += num1 + num2;
-                if (score > 28) {
-                    score = score - 28;
+                if (score > 39) {
+                    score = score - 39;
                 }
                 // Function to add properties should be added
             }
