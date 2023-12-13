@@ -1,11 +1,12 @@
 import java.util.List;
+import java.util.Random;
 
 public class CommunityChestCard implements Cards{
     private String description;
     private Board board;
+    private Random random = new Random();
 
-    public CommunityChestCard(String description, Board board) {
-        this.description = description;
+    public CommunityChestCard(Board board) {
         this.board = board;
     }
 
@@ -19,99 +20,127 @@ public class CommunityChestCard implements Cards{
         int currentMoney = player.getMoney();
         List<Player> allPlayers = Players.getAllPlayers();
 
-        switch (getDescription()) {
-            case "Advance to Go (Collect $200)":
-                System.out.println("Player " + player.getName() + " advances to Go and collects $200.");
-                player.setMoney(currentMoney + 200);
-                advanceToPosition(player,"GO");
-                break;
+        while(true) {
+        int randomNum = random.nextInt(1,17);
+            switch (randomNum) {
+                case 1:
+                    System.out.println("Player " + player.getName() + " advances to Go and collects $200.");
+                    player.setMoney(currentMoney + 200);
+                    advanceToPosition(player, "GO");
 
-            case "Bank error in your favor. Collect $200":
-                System.out.println("Player " + player.getName() + " collects $200 due to a bank error.");
-                player.setMoney(currentMoney + 200);
-                break;
+                    System.out.println("Position "+ player.getPosition());
+                    break;
 
-            case "CommunityChest:Doctor's fee. Pay $50":
-                System.out.println("Player " + player.getName() + " pays a doctor's fee of $50.");
-                player.setMoney(currentMoney - 50);
-                break;
+                case 2:
+                    System.out.println("Player " + player.getName() + " collects $200 due to a bank error.");
+                    player.setMoney(currentMoney + 200);
 
-            case "CommunityChest:From sale of stock you get $50":
-                System.out.println("Player " + player.getName() + " receives $50 from the sale of stock.");
-                player.setMoney(currentMoney + 50);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:Get Out of Jail Free":
-                System.out.println("Player " + player.getName() + " receives a Get Out of Jail Free card.");
-                player.setHasGetOutOfJailFreeCard(true);
-                break;
+                case 3:
+                    System.out.println("Player " + player.getName() + " pays a doctor's fee of $50.");
+                    player.setMoney(currentMoney - 50);
 
-            case "CommunityChest:Go to Jail. Go directly to jail, do not pass Go, do not collect $200":
-                System.out.println("Player " + player.getName() + " goes to Jail.");
-                advanceToPosition(player,"GO TO JAIL!");
-                player.setInJail(true);
-                player.resetRoundsInJail();
-                Jail.handleJail(player);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:Holiday fund matures. Receive $100":
-                System.out.println("Player " + player.getName() + " receives $100 as the holiday fund matures.");
-                player.setMoney(currentMoney + 100);
-                break;
+                case 4:
+                    System.out.println("Player " + player.getName() + " receives $50 from the sale of stock.");
+                    player.setMoney(currentMoney + 50);
 
-            case "CommunityChest:Income tax refund. Collect $20":
-                System.out.println("Player " + player.getName() + " collects an income tax refund of $20.");
-                player.setMoney(currentMoney + 20);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:It is your birthday. Collect $10 from every player":
-                System.out.println("Player " + player.getName() + " collects $10 from every player for their birthday.");
-                for (Player otherPlayer : allPlayers) {
-                    if (otherPlayer != player) {
-                        int otherPlayerMoney = otherPlayer.getMoney();
-                        otherPlayer.setMoney(otherPlayerMoney - 10);
-                        player.setMoney(player.getMoney() + 10);
+                case 5:
+                    System.out.println("Player " + player.getName() + " receives a Get Out of Jail Free card.");
+                    player.setHasGetOutOfJailFreeCard(true);
+                    break;
+
+                case 6:
+                    System.out.println("Player " + player.getName() + " goes to Jail.");
+                    advanceToPosition(player, "GO TO JAIL!");
+                    player.setInJail(true);
+                    player.resetRoundsInJail();
+                    Jail.handleJail(player);
+                    break;
+
+                case 7:
+                    System.out.println("Player " + player.getName() + " receives $100 as the holiday fund matures.");
+                    player.setMoney(currentMoney + 100);
+
+                    System.out.println("Money: " + player.getMoney());
+                    break;
+
+                case 8:
+                    System.out.println("Player " + player.getName() + " collects an income tax refund of $20.");
+                    player.setMoney(currentMoney + 20);
+
+                    System.out.println("Money: " + player.getMoney());
+                    break;
+
+                case 9:
+                    System.out.println("Player " + player.getName() + " collects $10 from every player for their birthday.");
+                    for (Player otherPlayer : allPlayers) {
+                        if (otherPlayer != player) {
+                            int otherPlayerMoney = otherPlayer.getMoney();
+                            otherPlayer.setMoney(otherPlayerMoney - 10);
+                            player.setMoney(player.getMoney() + 10);
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case "CommunityChest:Life insurance matures.Collect $100":
-                System.out.println("Player " + player.getName() + " collects $100 as their life insurance matures.");
-                player.setMoney(currentMoney + 100);
-                break;
+                case 10:
+                    System.out.println("Player " + player.getName() + " collects $100 as their life insurance matures.");
+                    player.setMoney(currentMoney + 100);
 
-            case "CommunityChest:Pay hospital fees of $100":
-                System.out.println("Player " + player.getName() + " pays hospital fees of $100.");
-                player.setMoney(currentMoney - 100);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:Pay school fees of $50":
-                System.out.println("Player " + player.getName() + " pays school fees of $50.");
-                player.setMoney(currentMoney - 50);
-                break;
+                case 11:
+                    System.out.println("Player " + player.getName() + " pays hospital fees of $100.");
+                    player.setMoney(currentMoney - 100);
 
-            case "CommunityChest:Receive $25 consultancy fee":
-                System.out.println("Player " + player.getName() + " receives a $25 consultancy fee.");
-                player.setMoney(currentMoney + 25);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:You are assessed for street repair. $40 per house. $115 per hotel":
-                System.out.println("Player " + player.getName() + " is assessed for street repair.");
-                break;
+                case 12:
+                    System.out.println("Player " + player.getName() + " pays school fees of $50.");
+                    player.setMoney(currentMoney - 50);
 
-            case "CommunityChest:You have won second prize in a beauty contest. Collect $10":
-                System.out.println("Player " + player.getName() + " has won second prize in a beauty contest and collects $10.");
-                player.setMoney(currentMoney + 10);
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
 
-            case "CommunityChest:You inherit $100":
-                System.out.println("Player " + player.getName() + " inherits $100.");
-                player.setMoney(currentMoney + 100);
-                break;
+                case 13:
+                    System.out.println("Player " + player.getName() + " receives a $25 consultancy fee.");
+                    player.setMoney(currentMoney + 25);
 
-            default:
-                System.out.println("No specific action for this Community Chest card");
-                break;
+                    System.out.println("Money: " + player.getMoney());
+                    break;
+
+                case 14:
+                    System.out.println("Player " + player.getName() + " is assessed for street repair.");
+                    break;
+
+                case 15:
+                    System.out.println("Player " + player.getName() + " has won second prize in a beauty contest and collects $10.");
+                    player.setMoney(currentMoney + 10);
+
+                    System.out.println("Money: " + player.getMoney());
+                    break;
+
+                case 16:
+                    System.out.println("Player " + player.getName() + " inherits $100.");
+                    player.setMoney(currentMoney + 100);
+
+                    System.out.println("Money: " + player.getMoney());
+                    break;
+
+                default:
+                    System.out.println("No specific action for this Community Chest card");
+                    break;
+            }
+            break;
         }
     }
     private void advanceToPosition(Player player, String targetPosition) {

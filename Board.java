@@ -16,7 +16,7 @@ public class Board {
     }
     private void initializeBoard() {
         boardPositions = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
+
             boardPositions.add("GO");
             boardPositions.add("OLD KENT \nROAD \n$60");
             boardPositions.add("COMMUNITY CHEST");
@@ -57,7 +57,7 @@ public class Board {
             boardPositions.add("PARK \n LANE \n $350");
             boardPositions.add("SUPER \n TAX \n $100");
             boardPositions.add("MAYFAIR \n $400");
-        }
+
     }
     public int getPositionIndexByName(String targetPosition) {
         return boardPositions.indexOf(targetPosition);

@@ -1,20 +1,21 @@
-import java.nio.file.attribute.UserPrincipalLookupService;
-
 public class PlayGame {
     private Players users;
     private Dice dice;
-    private Properties properties;
+    private MonopolyProperties monopolyProperties;
     private Player currentPlayer;
     private Board gameBoard;
     private CardManager cardManager;
+    Round round;
 
-    public PlayGame(Player currentPlayer, Board gameBoard, CardManager cardManager, Players users, Dice dice, Properties properties) {
+    public PlayGame(Player currentPlayer, Board gameBoard, CardManager cardManager, Players users, Dice dice, MonopolyProperties monopolyProperties, Round round) {
         this.currentPlayer = currentPlayer;
         this.gameBoard = gameBoard;
         this.cardManager = cardManager;
         this.users = users;
         this.dice = dice;
-        this.properties = properties;
+        this.monopolyProperties = monopolyProperties;
+        this.round = round;
+
     }
 
     public void checkAndExecuteCard() {
@@ -40,16 +41,35 @@ public class PlayGame {
         }
     }
 
-    public void Play() {
-        users.setPlayer();  // Allow players to enter their names
-        properties.setProperties();
 
-        for (int i = 0; i < 4; i++) {
-            System.out.println(users.players[i].getName() + "'s turn:");
-            System.out.println();
-            System.out.println(users.players[i].throwDice());
-            properties.buyProperty(i);
-            checkAndExecuteCard();
+    public void Play() {
+        users.setPlayer();
+        monopolyProperties.setProperties();
+        int x = 4;
+
+        while (users.players.length > 0) {
+            for (int i = 0; i < x; i++) {
+                System.out.println(users.players[i].getName() + "'s turn:");
+                System.out.println();
+                int newPosition = users.players[i].throwDice();
+                users.players[i].setPosition(newPosition);
+
+                round.outcomeResult(i);
+
+                if (users.players[i].getMoney() <= 0) {
+
+                    removePlayer(i);
+                    i--;
+                    x--;
+                }
+            }
         }
+    }
+    private void removePlayer(int index) {
+        // Create a new array without the player to be removed
+        Player[] newPlayersArray = new Player[users.players.length - 1];
+        System.arraycopy(users.players, 0, newPlayersArray, 0, index);
+        System.arraycopy(users.players, index + 1, newPlayersArray, index, users.players.length - index - 1);
+        users.players = newPlayersArray;
     }
 }
