@@ -41,7 +41,6 @@ public class PlayGame {
         }
     }
 
-
     public void Play() {
         users.setPlayer();
         monopolyProperties.setProperties();
@@ -51,13 +50,11 @@ public class PlayGame {
             for (int i = 0; i < x; i++) {
                 System.out.println(users.players[i].getName() + "'s turn:");
                 System.out.println();
+
                 int newPosition = users.players[i].throwDice();
                 users.players[i].setPosition(newPosition);
-
                 round.outcomeResult(i);
-
                 if (users.players[i].getMoney() <= 0) {
-
                     removePlayer(i);
                     i--;
                     x--;
@@ -65,6 +62,7 @@ public class PlayGame {
             }
         }
     }
+
     private void removePlayer(int index) {
         // Create a new array without the player to be removed
         Player[] newPlayersArray = new Player[users.players.length - 1];

@@ -1,12 +1,18 @@
 import java.util.List;
 import java.util.Random;
 
-public class CommunityChestCard implements Cards{
+public class CommunityChestCard implements Cards {
     private String description;
     private Board board;
     private Random random = new Random();
 
+    Round round;
+    Players users;
+    CommunityChestCard communityChestCard;
+    ChanceCard chanceCard;
+    MonopolyProperties monopolyProperties;
     public CommunityChestCard(Board board) {
+        round = new Round(users,communityChestCard,chanceCard, monopolyProperties);
         this.board = board;
     }
 
@@ -15,20 +21,22 @@ public class CommunityChestCard implements Cards{
         return description;
     }
 
+
     @Override
     public void executeAction(Player player) {
         int currentMoney = player.getMoney();
         List<Player> allPlayers = Players.getAllPlayers();
+        int i =round.x%4;
+        while (true) {
 
-        while(true) {
-        int randomNum = random.nextInt(1,17);
+            int randomNum = random.nextInt(1, 17);
             switch (randomNum) {
                 case 1:
                     System.out.println("Player " + player.getName() + " advances to Go and collects $200.");
-                    player.setMoney(currentMoney + 200);
+                    currentMoney = +200;
+                    player.setMoney(currentMoney);
                     advanceToPosition(player, "GO");
-
-                    System.out.println("Position "+ player.getPosition());
+                    round.outcomeResult(i);
                     break;
 
                 case 2:
@@ -143,6 +151,7 @@ public class CommunityChestCard implements Cards{
             break;
         }
     }
+
     private void advanceToPosition(Player player, String targetPosition) {
         List<String> boardPositions = board.getBoardPositions();
         int targetPos = board.getPositionIndexByName(targetPosition);
