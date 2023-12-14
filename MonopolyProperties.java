@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -37,15 +38,14 @@ public class MonopolyProperties {
 
     public Property[] ownedProperties() {
         Property[] props = setProperties();
-        Property[] ownedProperties = new Property[39];
-        int count = 0;
+        ArrayList<Property> ownedPropertiesList = new ArrayList<>();
 
         for (Property property : props) {
             if (property != null && property.isBought) {
-                ownedProperties[count++] = property;
+                ownedPropertiesList.add(property);
             }
         }
 
-        return Arrays.copyOfRange(ownedProperties, 0, count);
+        return ownedPropertiesList.toArray(new Property[0]);
     }
 }

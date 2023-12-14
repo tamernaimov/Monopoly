@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class House {
+public class House implements  PropertyManager{
     protected ArrayList<House> houses;
     MonopolyProperties props;
     Property[] properties;
@@ -31,7 +31,7 @@ public class House {
 
     public int getCost(int i) {
         properties = props.setProperties();
-        if (houses.size() == 0) {
+        if (houses.isEmpty()) {
             if (properties[i].getName().equals("Brown") || properties[i].getName().equals("Light Blue")) return 50;
             if (properties[i].getName().equals("Pink") || properties[i].getName().equals("Orange")) return 100;
             if (properties[i].getName().equals("Red") || properties[i].getName().equals("Yellow")) return 150;
@@ -47,10 +47,10 @@ public class House {
             if (properties[i].getName().equals("Red") || properties[i].getName().equals("Yellow")) return 450;
             if (properties[i].getName().equals("Green") || properties[i].getName().equals("Dark Blue")) return 600;
         } else if (houses.size() == 3) {
-            if (properties[i].getName().equals("Brown") || properties[i].getName().equals("Light Blue")) return 200;
-            if (properties[i].getName().equals("Pink") || properties[i].getName().equals("Orange")) return 400;
-            if (properties[i].getName().equals("Red") || properties[i].getName().equals("Yellow")) return 600;
-            if (properties[i].getName().equals("Green") || properties[i].getName().equals("Dark Blue")) return 800;
+            if (properties[i].getName().equals("Brown") || properties[i].getName().equals("Light Blue")) return 200;//will be needed for hotel
+            if (properties[i].getName().equals("Pink") || properties[i].getName().equals("Orange")) return 400;//will be needed for hotel
+            if (properties[i].getName().equals("Red") || properties[i].getName().equals("Yellow")) return 600;//will be needed for hotel
+            if (properties[i].getName().equals("Green") || properties[i].getName().equals("Dark Blue")) return 800;//will be needed for hotel
         }
         return 0;
     }

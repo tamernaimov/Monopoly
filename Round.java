@@ -21,7 +21,12 @@ public class Round {
     }
 
     public void outcomeResult(int i) {
+        System.out.println();
 
+        for (int j = 0; j < 4; j++) {
+            System.out.println(users.players[j].getName()+ "'s  Position is: " + users.players[j].getPosition());
+        }
+        System.out.println();
         properties = props.setProperties();
         if (users.players[i].getPosition() == 20) {
             System.out.println("Just visiting The Parking lot..");
@@ -38,7 +43,8 @@ public class Round {
         }
         else if (users.players[i].getPosition() == 12) {
             //ADd Funcftions
-            System.out.println("VISITNG....");
+            System.out.println("150 Dollars will be taken!");
+           users.players[i].money -= 150;
         }
         else if (users.players[i].getPosition() == 2 || users.players[i].getPosition() == 17 || users.players[i].getPosition() == 33) {
             communityChestCard.executeAction(users.players[i]);
@@ -51,26 +57,30 @@ public class Round {
             //FUNCTIONS SHOULD BE ADDED
         } else {
             boolean permission = true;
+
             outerloop:
             for (int j = 0; j < props.ownedProperties().length; j++) {
                 if (users.players[i].getPosition() == props.ownedProperties()[j].getPosition()) {
-                    for (int k = 0; k < users.players[i].returnProperties().length(); k++) {
-                        if (users.players[i].returnProperties().contains(props.ownedProperties()[j].getName())) {
-                            //If you got here you are on your own Property
-                            System.out.println("You are On your Own Property!");
-                            properties[users.players[i].getPosition()].buyHosue(i);
-                            permission = false;
-                            break outerloop;
+                    String propertyName = props.ownedProperties()[j].getName();
 
-                        } else
-                            System.out.println("You have landed on someone's property! Pay up!");
-                            users.players[i].money -= props.ownedProperties()[j].getRent();
+                    if (users.players[i].returnProperties().contains(propertyName)) {
+                        // Player landed on their own property
+                        System.out.println("You are On your Own Property!");
+                        properties[users.players[i].getPosition()].buyHosue(i);
+                    } else {
+                        // Player landed on someone else's property
+                        System.out.println("You have landed on someone else's property! Pay up!");
+                        users.players[i].money -= props.ownedProperties()[j].getRent();
                     }
+
+                    permission = false;
+                    break; // Exit the loop after handling the scenario
                 }
             }
 
+
             if (permission == true) {
-                System.out.println("Your Current Position " + users.players[i].getPosition());
+
                 System.out.println("Would you like to buy this property");
                 System.out.println();
                 System.out.println("Name: " + properties[users.players[i].getPosition()].getName());
@@ -90,6 +100,7 @@ public class Round {
                     }
                 }
                 properties[users.players[i].getPosition()].buyHosue(i);
+                properties[users.players[i].getPosition()].buyHotel(i);
             }
         }
         showMenu(i);
@@ -102,7 +113,6 @@ public class Round {
         System.out.println("1: Your Money");
         System.out.println("2: Your Properties");
         System.out.println("3: None");
-        System.out.println("4: ");
 
         int answer = scanner1.nextInt();
         switch (answer) {
