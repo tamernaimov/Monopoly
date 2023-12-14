@@ -51,7 +51,7 @@ public class PlayGame {
                 System.out.println(users.players[i].getName() + "'s turn:");
                 System.out.println();
 
-                int newPosition = users.players[i].throwDice();
+                int newPosition = users.players[i].diceScore();
                 users.players[i].setPosition(newPosition);
                 round.outcomeResult(i);
                 if (users.players[i].getMoney() <= 0) {

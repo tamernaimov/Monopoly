@@ -44,6 +44,7 @@ public class Main {
         Round round = new Round(players, communityChestCard, chanceCard, monopolyProperties);
 
         String filePathToCards = whoIsWorking();
+
         String fileName = "Cards.txt";
         String cardPath = filePathToCards + File.separator + fileName;
         CardManager cardManager = new CardManager(cardPath, board);

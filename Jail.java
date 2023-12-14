@@ -51,8 +51,8 @@ public class Jail {
     }
 
     private static void rollForDouble(Player player) {
-        int diceRoll1 = player.throwDice();
-        int diceRoll2 = player.throwDice();
+        int diceRoll1 = player.diceScore();
+        int diceRoll2 = player.diceScore();
         System.out.println(player.getName() + " rolled a " + diceRoll1 + " and " + diceRoll2);
 
         if (diceRoll1 == diceRoll2) {
