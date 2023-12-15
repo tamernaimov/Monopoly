@@ -100,6 +100,10 @@ public class Player {
         isInJail = inJail;
     }
 
+    public void setRoundsInJail(int roundsInJail) {
+        this.roundsInJail = roundsInJail;
+    }
+
     public int getRoundsInJail() {
         return roundsInJail;
     }

@@ -14,7 +14,7 @@ public class CardManager {
         this.board = board;
     }
 
-    private List<Cards> readCardsFromFile(String prefix) {
+    public List<Cards> readCardsFromFile(String prefix) {
         List<Cards> cards = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(cardFilePath))) {
