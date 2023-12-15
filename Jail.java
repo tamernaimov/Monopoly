@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Jail {
-    private static final int JAIL_ROUNDS = 2;
-    private static final int JAIL_FINE = 1500;
+    public static final int JAIL_ROUNDS = 2;
+    public static final int JAIL_FINE = 1500;
 
     public static void handleJail(Player player) {
         if (player.isInJail()) {
@@ -40,7 +40,7 @@ public class Jail {
         }
     }
 
-    private static void payFine(Player player) {
+    public static void payFine(Player player) {
         if (player.getMoney() >= JAIL_FINE) {
             player.setInJail(false);
             player.setMoney(player.getMoney() - JAIL_FINE);
@@ -50,7 +50,7 @@ public class Jail {
         }
     }
 
-    private static void rollForDouble(Player player) {
+    public static void rollForDouble(Player player) {
         int diceRoll1 = player.diceScore();
         int diceRoll2 = player.diceScore();
         System.out.println(player.getName() + " rolled a " + diceRoll1 + " and " + diceRoll2);
@@ -63,7 +63,7 @@ public class Jail {
         }
     }
 
-    private static void useGetOutOfJailFreeCard(Player player) {
+    public static void useGetOutOfJailFreeCard(Player player) {
         if (player.hasGetOutOfJailFreeCard()) {
             player.setInJail(false);
             player.useGetOutOfJailFreeCard();

@@ -26,5 +26,9 @@ public class Players {
             players[i].money = 1500;
         }
     }
+
+    public static void setAllPlayers(List<Player> allPlayers) {
+        Players.allPlayers = allPlayers;
+    }
 }
 
